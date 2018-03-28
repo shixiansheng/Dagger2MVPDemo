@@ -37,7 +37,8 @@ public  class BaseModel<K,V> {
         map.clear();
         return this;
     }
-    public Observable<ResponseBody> getResponse() {
-        return  RetrofitManager.getInstance().execute("quarter/getJokes",map);
+
+    public void getResponse(String path, ResultCallback resultCallBack) {
+        RetrofitManager.getInstance().request(path,map,resultCallBack);
     }
 }

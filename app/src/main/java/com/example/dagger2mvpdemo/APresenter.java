@@ -1,15 +1,14 @@
 package com.example.dagger2mvpdemo;
 
-import android.text.TextUtils;
-
+import com.example.dagger2mvpdemo.base.BaseEntity;
 import com.example.dagger2mvpdemo.base.BaseModel;
 import com.example.dagger2mvpdemo.base.BasePresenter;
-import com.example.dagger2mvpdemo.base.BaseResponse;
+import com.example.dagger2mvpdemo.base.ResultCallback;
+import com.example.dagger2mvpdemo.entity.User;
+
+import java.util.List;
 
 import javax.inject.Inject;
-
-import io.reactivex.functions.Consumer;
-import okhttp3.ResponseBody;
 
 /**
  * @author 时志邦
@@ -28,14 +27,11 @@ public class APresenter extends BasePresenter<MBaseView> {
     }
 
 
-    public <P> void relevance(){//http://baobab.kaiyanapp.com/api/v2/ ?udid=26868b32e808498db32fd51fb422d00175e179df&vc=83
-        baseModel.getResponse().subscribe(new Consumer<ResponseBody>() {
+    public  void getUser(String path){//http://baobab.kaiyanapp.com/api/v2/ ?udid=26868b32e808498db32fd51fb422d00175e179df&vc=83
+        baseModel.getResponse(path, new ResultCallback<BaseEntity<List<User>>>() {
             @Override
-            public void accept(ResponseBody responseBody) throws Exception {
-                String json = responseBody.string();
-                if (TextUtils.isEmpty(json))return;
-                BaseResponse<P> objectBaseResponse = new BaseResponse<>(json);
-               mView.showData(objectBaseResponse);
+            public void onResponse(BaseEntity<List<User>> response, String json) {
+                mView.showData(response);
             }
         });
     };

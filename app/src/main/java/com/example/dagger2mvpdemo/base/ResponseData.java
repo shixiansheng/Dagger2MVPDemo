@@ -17,16 +17,17 @@ public class ResponseData {
     public static String CODE_NOT_LOGIN = "2";
     public String mData;
     public String mCode;
-    public String mMsg;
+    public int mMsg;
     private JSONObject mObject;
 
     public ResponseData(String data) {
             if (TextUtils.isEmpty(data))return;
         try {
             mObject = new JSONObject(data);//应该是response
-            mCode = mObject.optString("code","");
-            mMsg = mObject.optString("msg","");
-            mData = mObject.optString("data","");
+            mCode = mObject.optString("reason","");
+            mMsg = mObject.optInt("error_code",1);
+            mData = mObject.optString("result","");
+            System.out.println("mdata:"+mData);
         } catch (JSONException e) {
             e.printStackTrace();
         }

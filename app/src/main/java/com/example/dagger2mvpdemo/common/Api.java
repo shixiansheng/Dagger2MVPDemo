@@ -7,5 +7,7 @@ package com.example.dagger2mvpdemo.common;
 
 public class Api {
 
-    public static final String baseUrl = "https://www.zhaoapi.cn/";
+   // public static final String baseUrl = "https://www.zhaoapi.cn/";
+    public static final String baseUrl = "https://api.qichangv.com/";
+
 }
